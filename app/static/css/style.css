@@ -1,0 +1,297 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #2c3e50;
+    padding: 10px;
+    text-align: center;
+}
+
+.menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+}
+
+.menu li {
+    margin: 0 15px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    text-decoration: underline;
+}
+
+.container {
+  padding: 10px;
+}
+
+/* dashboard */
+.chart-container , .compare-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  /* padding: 10px; */
+}
+
+.chart-box {
+  /* border-radius: 8px; */
+  /* margin: 5px; */
+  background-color: #dce3ea;
+  min-width: 0;
+}
+
+/* .chart-box canvas {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+} */
+
+.table-container {
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #dce3ea;
+}
+.chart-box h3, .table-container h3 {
+  text-align: center;
+  margin: 5px;
+}
+#tegalTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#tegalTable th, #tegalTable td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+#kemiskinanTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#kemiskinanTable th, #kemiskinanTable td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  text-align: center;
+}
+
+/* Style khusus halaman upaya */
+.grafik-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 5px;
+  background-color: #dce3ea;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.donut-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 5px;
+  padding: 5px;
+  text-align: center;
+}
+
+#legend-list{
+  grid-column: 1 / span 2;
+  justify-self: center;   
+  list-style: none;       
+  padding: 0;
+  margin-top: 10px;
+}
+
+.resume-container{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #dce3ea;
+}
+.resume-container h3{
+  text-align: center;
+}
+
+.resume-container table{
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.resume-container th, .resume-container td{
+  border: 1px solid black;
+  padding: 10px;
+}
+/*  */
+.upaya-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* grafik 2/3, tabel 1/3 */
+  grid-gap: 5px;
+  padding: 5px;
+}
+.upaya-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr; /* grafik 2/3, tabel 1/3 */
+  grid-gap: 10px;
+}
+
+.upaya-grid .chart-box {
+  background: #f9f9f9;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.upaya-grid .chart-box h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.upaya-grid table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.upaya-grid th, .upaya-grid td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.upaya-grid th {
+  background-color: #f0f0f0;
+}
+
+.upaya-grid td:nth-child(2),
+.upaya-grid td:nth-child(3) {
+  text-align: right; /* angka rata kanan */
+}
+
+.upaya-grid-detail {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #dce3ea;
+}
+
+.upaya-grid-detail h3 {
+  text-align: center;
+}
+
+.upaya-grid-detail table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.upaya-grid-detail th, .upaya-grid-detail td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.upaya-grid-detail th {
+  background-color: #f0f0f0;
+}
+
+.strategi-row {
+  background-color: #dfe6e9;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.strategi-row.open {
+  background-color: #b2bec3;
+}
+
+/* Atur font-size tabel di halaman upaya */
+.upaya-grid table,
+.upaya-grid-detail table {
+  font-size: 14px; /* default lebih kecil */
+}
+
+.upaya-grid th, 
+.upaya-grid td,
+.upaya-grid-detail th,
+.upaya-grid-detail td {
+  font-size: 14px; /* konsisten di header dan isi */
+  padding: 5px;    /* padding bisa diperkecil agar lebih rapat */
+}
+
+
+#scrollTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
+  font-size: 30px;
+  border: none;
+  outline: none;
+  background-color: #2c3e50;
+  color: white;
+  cursor: pointer;
+  padding: 12px 16px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  display: none; /* default disembunyikan */
+  transition: background-color 0.3s;
+}
+
+#scrollTopBtn:hover {
+  background-color: #34495e;
+}
+
+/* organisasi */
+.org-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(9);
+  /* gap: 10px; */
+  /* width: 100%; */
+  position: relative; 
+  margin: 10px 10px;
+}
+.org-item {
+  border: 1px solid #333;
+  margin: 10px;
+  text-align: left;
+  background: #f9f9f9;
+}
+.org-space-item {
+  margin: 10px;
+  text-align: left;
+}
+svg.connector {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* biar tidak ganggu klik */
+}
+
+#pj th, #pj td{
+  text-align: center;
+  vertical-align: middle;
+}
+
+#pj {
+  width: 100%;
+  height: 100%;
+}

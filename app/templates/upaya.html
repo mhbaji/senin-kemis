@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Upaya Pengentasan Kemiskinan Kota Tegal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul class="menu">
+            <li><a href="/">Beranda</a></li>
+            <li><a href="/upaya">Upaya</a></li>
+            <li><a href="/organisasi">Organisasi</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="grafik-container">    
+            <div class="donut-container">
+                <div>
+                    <canvas id="dist-subkegiatan-chart"></canvas>
+                </div>
+                <div>
+                    <canvas id="dist-anggaran-chart"></canvas>
+                </div>
+                <ul id="legend-list"></ul>
+            </div>
+            
+            <div class="bar-container">
+                <canvas id="chart-realisasi-strategi"></canvas>
+            </div>
+        </div>
+
+        <div class="resume-container">
+            <h3>Ringkasan Subkegiatan dan Anggaran</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th rowspan="2">Strategi</th>
+                        <th rowspan="2">Jumlah Subkegiatan</th>
+                        <th rowspan="2">Persentase Subkegiatan (%)</th>
+                        <th rowspan="2">Jumlah Anggaran (Rp)</th>
+                        <th rowspan="2">Persentase Anggaran (%)</th>
+                        <th colspan="5">Realisasi</th>
+                    </tr>
+                    <tr>
+                        <th>Triwulan 1</th>
+                        <th>Triwulan 2</th>
+                        <th>Triwulan 3</th>
+                        <th>Triwulan 4</th>
+                        <th>Persentase Realisasi (%)</th>
+                    </tr>
+                </thead>
+                <tbody id="summary-body"></tbody>
+            </table>
+        </div>
+
+        <div class="upaya-grid-detail">
+            <h3>Detail Anggaran dan Realisasi Subkegiatan</h3>
+            <table>
+                <thead>
+                <tr>
+                    <!-- <th rowspan="2">Strategi</th> -->
+                    <th rowspan="2">OPD</th>
+                    <th rowspan="2">Program</th>
+                    <th rowspan="2">Kegiatan</th>
+                    <th rowspan="2">Subkegiatan</th>
+                    <th rowspan="2">Anggaran</th>
+                    <th colspan="5">Realisasi</th>
+                </tr>
+                <tr>
+                    <th>Triwulan 1</th>
+                    <th>Triwulan 2</th>
+                    <th>Triwulan 3</th>
+                    <th>Triwulan 4</th>
+                    <th>Total</th>
+                </tr>
+                </thead>
+                <tbody id="upaya-detail-body"></tbody>
+            </table>
+        </div>
+    </div>
+    <button id="scrollTopBtn" title="Kembali ke atas">^</button>
+
+    <script src="{{ url_for('static', filename='js/upaya.js') }}"></script>
+</body>
+</html>

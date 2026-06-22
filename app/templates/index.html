@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Kemiskinan Kota Tegal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul class="menu">
+            <li><a href="/">Beranda</a></li>
+            <li><a href="/upaya">Upaya</a></li>
+            <li><a href="/organisasi">Organisasi</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <div class="chart-container">
+            <div class="chart-box">
+                <h3>Target vs Capaian Kota Tegal</h3>
+                <canvas id="chartTargetCapaian"></canvas>
+            </div>
+
+            <div class="chart-box">
+                <h3>Kedalaman, Keparahan, Indeks Gini</h3>
+                <canvas id="chartKedalamanKeparahanGini"></canvas>
+            </div>
+
+            <div class="chart-box">
+                <h3>Garis Kemiskinan Kota Tegal</h3>
+                <canvas id="chartGarisKemiskinan"></canvas>
+            </div>
+        </div>
+        
+        <div class="table-container">
+            <h3>Data Kemiskinan Kota Tegal</h3>
+            <table id="tegalTable">
+                <thead>
+                <tr>
+                    <th>Tahun</th>
+                    <th>Target Min</th>
+                    <th>Target Max</th>
+                    <th>Jumlah Penduduk Miskin (Ribu Jiwa)</th>
+                    <th>Persentase Penduduk Miskin (%)</th>
+                    <th>Garis Kemiskinan</th>
+                    <th>Kedalaman</th>
+                    <th>Keparahan</th>
+                    <th>Indeks Gini</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div class="compare-container">
+            <div class="chart-box">
+                <h3>Kota Tegal vs Provinsi vs Nasional</h3>
+                <canvas id="chartTegalJatengIndonesia"></canvas>
+            </div>
+            
+            <div class="chart-box">
+                <h3>Kota Tegal vs Sekitar</h3>
+                <canvas id="chartTegalKabupaten"></canvas>
+            </div>
+            
+            <div class="chart-box">
+                <h3>Kota Tegal vs Kota lain</h3>
+                <canvas id="chartTegalKotaLain"></canvas>
+            </div>                
+        </div>
+
+        <div class="table-container">
+            <h3>Tingkat Kemiskinan</h3>
+            <table id="kemiskinanTable">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>

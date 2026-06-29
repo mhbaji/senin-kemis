@@ -260,7 +260,7 @@ nav {
 /* organisasi */
 .org-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(9, 1fr);
   grid-template-rows: repeat(9);
   /* gap: 10px; */
   /* width: 100%; */
@@ -292,6 +292,14 @@ svg.connector {
 }
 
 #pj {
+  width: 100%;
+  height: 100%;
+}
+
+.ketuwaketu tr, .ketuwaketu td {
+  text-align:center
+}
+.ketuwaketu {
   width: 100%;
   height: 100%;
 }

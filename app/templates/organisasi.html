@@ -16,81 +16,40 @@
   </nav>
 
   <div class="org-container" id="grid">
-    <div class="org-item" id="box1" style="grid-column: 3; grid-row: 1;">
-        <table id="pj">
-            <thead>
-                <tr>
-                    <th>Penanggung Jawab</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Wali Kota</td>
-                </tr>
-            </tbody>
+    <div class="org-item" id="box1" style="grid-column: 4/7; grid-row: 1;">
+        <table id="pj"> </table>
+    </div>
+
+    <div class="org-space-item" id="space1" style="grid-column: 5; grid-row: 2;">
+    </div>
+
+    <div class="org-item" id="box2" style="grid-column: 4/7; grid-row: 3;">
+        <table class="ketuwaketu">
+            <thead> <tr id="ketua"></tr> </thead>
+            <tbody> <tr id="wakilKetua"> </tr> </tbody>
         </table>
     </div>
 
-    <div class="org-space-item" id="space1" style="grid-column: 2; grid-row: 2;">
-    </div>
-
-    <div class="org-item" id="box2" style="grid-column: 3; grid-row: 3;">
-        <table >
-            <thead>
-                <tr>
-                    <th>Ketua</th>
-                    <th>:</th>
-                    <th>Wakil Wali Kota</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Wakil Ketua</td>
-                    <td>:</td>
-                    <td>Sekretaris Daerah</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="org-space-item" id="space2" style="grid-column: 2; grid-row: 4;">
+    <div class="org-space-item" id="space2" style="grid-column: 5; grid-row: 4;">
     </div>
 
     <!-- Baris 2, Kolom 4 -->
-    <div class="org-item" id="box3" style="grid-column: 4 / 6; grid-row: 5;">
+    <div class="org-item" id="box3" style="grid-column: 6/10; grid-row: 5;">
         <table >
-            <thead>
-                <tr>
-                    <th>Sekretaris</th>
-                    <th>:</th>
-                    <th>Kepala Bapperida</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Wakil Sekretaris I</td>
-                    <td>:</td>
-                    <td>Kepala Dinas Sosial</td>
-                </tr>
-                <tr>
-                    <td>Wakil Sekretaris II</td>
-                    <td>:</td>
-                    <td>Kepala DPPKBPPPA</td>
-                </tr>
-                <tr>
-                    <td>Wakil Sekretaris III</td>
-                    <td>:</td>
-                    <td>Kepala DISDUKCAPIL</td>
-                </tr>
+            <thead> <tr id="sekretaris"> </tr> </thead>
+            <tbody> 
+                <tr id="wasek1"> </tr>
+                <tr id="wasek2"> </tr>
+                <tr id="wasek3"> </tr>
             </tbody>
         </table>
     </div>
 
-    <div class="org-space-item" id="space3" style="grid-column: 2; grid-row: 6;">
+    <div class="org-space-item" id="space3" style="grid-column: 5; grid-row: 6;">
     </div>
 
 
-    <div class="org-item" id="box4" style="grid-column: 4 / 6; grid-row: 7;">
+    <div class="org-item" id="box4" style="grid-column: 6/10; grid-row: 7;">
         <table>    
             <thead>
                 <tr>
@@ -98,45 +57,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Kepala</td>
-                    <td>:</td>
-                    <td>Sekretaris Bapperida</td>
-                </tr>
-                <tr>
-                    <td>Wakil Kepala</td>
-                    <td>:</td>
-                    <td>Kepala Bagian Kesra Setda</td>
-                </tr>
-                <tr>
-                    <td>Anggota</td>
-                    <td>:</td>
-                    <td>Kepala Bidang PPM Bapperida</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Kepala Bidang Rendalev Bapperida</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Kepala Bidang PSIK Bapperida</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Kepala Bidang Risda Bapperida</td>
-                </tr>
+                <tr id="kepSek"> </tr>
+                <tr id="waKepSek"> </tr>
+                <tbody id="anggotaSek"></tbody>
             </tbody>
         </table>
     </div>
         
-    <div class="org-space-item" id="space4" style="grid-column: 2; grid-row: 8;">
+    <div class="org-space-item" id="space4" style="grid-column: 5; grid-row: 8;">
     </div>
 
     <!-- Baris 3, Kolom 1 -->
-    <div class="org-item" id="box5" style="grid-column: 1 / 3; grid-row: 9;">
+    <div class="org-item" id="box5" style="grid-column: 1/5; grid-row: 9;">
         <table >
             <thead>
                 <tr>
@@ -144,52 +76,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Koordinator</td>
-                    <td>:</td>
-                    <td>Asisten Pemerintahan dan Kesejahteraan Rakyat Sekda</td>
-                </tr>
-                <tr>
-                    <td>Anggota</td>
-                    <td>:</td>
-                    <td>Kepala Badan Keuangan Daerah</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Kepala Dinas Pendidikan dan Kebudayaan</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Kepala Dinas Kesehatan</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Kepala Dinas Perumahan dan Kawasan Permukiman</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Sekretaris Dinas Sosial</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Kepala Badan Pusat Statistik Kota Tegal</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Kepala Badan Amil Zakat Nasional Kota Tegal</td>
-                </tr>
+                <tr id="koorBansos"> </tr>
+                <tbody id="anggotaBansos"></tbody>
             </tbody>
         </table>
     </div>
 
     <!-- Baris 3, Kolom 3 -->
-    <div class="org-item" id="box6" style="grid-column: 4 / 6; grid-row: 9;">
+    <div class="org-item" id="box6" style="grid-column: 6/10; grid-row: 9;">
         <table >
             <thead>
                 <tr>
@@ -197,107 +91,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Koordinator</td>
-                    <td>:</td>
-                    <td>Asisten Perekonomian dan Pembangunan Sekda</td>
-                </tr>
-                <tr>
-                    <td>Anggota</td>
-                    <td>:</td>
-                    <td>Kepala Dinas Pekerjaan Umum dan Penataan Ruang</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Kepala Dinas Tenaga Kerja dan Perindustrian</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Kepala Dinas Koperasi, Usaha Kecil dan Menengah, dan Perdagangan</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Kepala Dinas Kelautan dan Perikanan, Pertanian dan Pangan</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Kepala Bank Indonesia Kantor Perwakilan Tegal</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Pimpinan Bank Pembangunan Daerah Jawa Tengah Cabang Koordinator Tegal</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Kepala Perusahaan Umum Badan Urusan Logistik Divisi Regional VI Pekalongan</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Ketua Lembaga Penelitian dan Pengabdian Kepada Masyarakat Universitas Pancasakti Kota Tegal</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Ketua Tim Penggerak Pemberdayaan dan Kesejahteraan Keluarga Kota Tegal</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Pimpinan Cabang Aisyiyah Kota Tegal</td>
-                </tr>
+                <tr id="koorPermas"> </tr>
+                <tbody id="anggotaPermas"></tbody>
             </tbody>
         </table>
     </div>
 
     <svg class="connector" id="connector"></svg>
   </div>
-
-  <!--
-  <div class="main-container">
-    <div class="main-table-container" id="main-table-container">
-      <div class="item" id="box1" style="grid-column: 3; grid-row: 1;">
-      </div>
-
-      <div class="space-item" id="space1" style="grid-column: 2; grid-row: 2;">
-      </div>
-
-      <div class="item" id="box2" style="grid-column: 3; grid-row: 3;">
-      </div>
-
-      <div class="space-item" id="space2" style="grid-column: 2; grid-row: 4;">
-      </div>
-
-      <div class="item" id="box3" style="grid-column: 4 / 6; grid-row: 5;">
-      </div>
-
-      <div class="space-item" id="space3" style="grid-column: 2; grid-row: 6;">
-      </div>
       
-      <div class="item" id="box4" style="grid-column: 4 / 6; grid-row: 7;">
-      </div>
-
-      <div class="space-item" id="space4" style="grid-column: 2; grid-row: 8;">
-      </div>
-
-      <div class="item" id="box5" style="grid-column: 1 / 3; grid-row: 9;">
-      </div>
-
-      <div class="item" id="box6" style="grid-column: 4 / 6; grid-row: 9;">
-      </div>
-    </div>
-
-    <div class="law-table-container">
-    </div>
-  </div>
-  -->
-    
   <script src="{{ url_for('static', filename='js/organisasi.js') }}"></script>
 </body>
 </html>

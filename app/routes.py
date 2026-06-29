@@ -326,7 +326,6 @@ def get_struktur_tkpk():
     for row in data:
         result.append({
             "id": row.id,
-            "atasan_id": row.atasan_id,
             "jabatan": row.jabatan,
             "dalam_tim": row.dalam_tim,
             "keterangan": row.keterangan

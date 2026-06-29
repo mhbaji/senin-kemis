@@ -61,131 +61,63 @@ async function loadStrukturTkpk() {
   try {
     const res = await fetch('/api/struktur_tkpk');
     const data = await res.json();
-    console.log(data);
 
     const tablePJ = document.getElementById("pj");
-    const tbanggotaSek = document.getElementById("anggotaSek");
-    const trkoorBansos = document.getElementById("koorBansos");
-    const tbanggotaBansos = document.getElementById("anggotaBansos");
-    const trkoorPermas = document.getElementById("koorPermas");
-    const tbanggotaPermas = document.getElementById("anggotaPermas");
 
-    // Peta dalam_tim ke elemen tr
+    // mapping row tunggal
     const rowMap = {
-      "Ketua": document.getElementById("ketua"),
-      "Wakil Ketua": document.getElementById("wakilKetua"),
-      "Sekretaris": document.getElementById("sekretaris"),
-      "Wakil Sekretaris I": document.getElementById("wasek1"),
-      "Wakil Sekretaris II": document.getElementById("wasek2"),
-      "Wakil Sekretaris III": document.getElementById("wasek3"),
-      "Kepala": document.getElementById("kepSek"),
-      "Wakil Kepala": document.getElementById("waKepSek"),
+      "Ketua": { el: document.getElementById("ketua"), tag: "th" },
+      "Wakil Ketua": { el: document.getElementById("wakilKetua"), tag: "td" },
+      "Sekretaris": { el: document.getElementById("sekretaris"), tag: "th" },
+      "Wakil Sekretaris I": { el: document.getElementById("wasek1"), tag: "td" },
+      "Wakil Sekretaris II": { el: document.getElementById("wasek2"), tag: "td" },
+      "Wakil Sekretaris III": { el: document.getElementById("wasek3"), tag: "td" },
+      "Kepala": { el: document.getElementById("kepSek"), tag: "td" },
+      "Wakil Kepala": { el: document.getElementById("waKepSek"), tag: "td" },
     };
 
-    // Fungsi helper untuk isi row
+    // mapping anggota per kelompok → tbody + ul
+    const anggotaMap = {
+      "Sekretariat": { ul: document.getElementById("listSekretariat") },
+      "Kelompok Pengelola Program Bantuan Sosial dan Jaminan Sosial Terpadu Berbasis Rumah Tangga, Keluarga dan Individu":
+        { ul: document.getElementById("listBansos"), koor: document.getElementById("koorBansos") },
+      "Kelompok Pengelola Program Pemberdayaan Masyarakat Dan Penguatan Pelaku Usaha Mikro dan Kecil":
+        { ul: document.getElementById("listPermas"), koor: document.getElementById("koorPermas") },
+    };
+
+    // helper isi row tunggal
     function fillRow(tr, tag, label, jabatan) {
-      const cellLabel = document.createElement(tag);
-      cellLabel.textContent = label;
-      tr.appendChild(cellLabel);
-
-      const cellColon = document.createElement(tag);
-      cellColon.textContent = ":";
-      tr.appendChild(cellColon);
-
-      const cellJabatan = document.createElement(tag);
-      cellJabatan.textContent = jabatan;
-      tr.appendChild(cellJabatan);
+      tr.innerHTML = `
+        <${tag}>${label}</${tag}>
+        <${tag}>:</${tag}>
+        <${tag}>${jabatan}</${tag}>
+      `;
     }
 
-    // helper untuk tambah anggota
-    function addAnggota(idTbody, jabatan, withLabel=false) {
-      const tr = document.createElement("tr");
-      if (withLabel) {
-        tr.innerHTML = `
-          <td>Anggota</td>
-          <td>:</td>
-          <td>${jabatan}</td>
-        `;
-      } else {
-        tr.innerHTML = `
-          <td></td>
-          <td></td>
-          <td>${jabatan}</td>
-        `;
-      }
-      idTbody.appendChild(tr);
+    // helper tambah anggota ke ul
+    function addAnggota(listEl, jabatan) {
+      const li = document.createElement("li");
+      li.textContent = jabatan;
+      listEl.appendChild(li);
     }
 
-    let idxAnggotaSek = 1
-    let idxAnggotaBansos = 1
-    let idxAnggotaPermas = 1
-    data.forEach(element => {
-      if (element.dalam_tim === "Penanggung Jawab") {
-        const thead = document.createElement("thead");
-        thead.innerHTML = `
-          <tr>
-            <th>${element.dalam_tim}</th>
-          </tr>
+    data.forEach(el => {
+      if (el.dalam_tim === "Penanggung Jawab") {
+        tablePJ.innerHTML = `
+          <thead><tr><th>${el.dalam_tim}</th></tr></thead>
+          <tbody><tr><td>${el.jabatan}</td></tr></tbody>
         `;
-
-        const tbody = document.createElement("tbody");
-        tbody.innerHTML = `
-          <tr>
-            <td>${element.jabatan}</td>
-          </tr>
-        `;
-
-        tablePJ.appendChild(thead);
-        tablePJ.appendChild(tbody);
-      } else {
-        // console.log(element.dalam_tim)
-        const tr = rowMap[element.dalam_tim];
-        // console.log(tr)
-        if (tr) {
-          // Tentukan pakai th atau td
-          let tag = "th"
-          console.log("includes", ["Ketua", "Sekretaris"].includes(element.dalam_tim))
-          if (["Ketua", "Sekretaris"].includes(element.dalam_tim) ){tag = "th"}
-          else {tag = "td"} 
-          fillRow(tr, tag, element.dalam_tim, element.jabatan);
-        }
-        else{
-          if(element.dalam_tim === "Anggota" && element.keterangan === "Sekretariat"){
-            if(idxAnggotaSek === 1){
-              addAnggota(tbanggotaSek, element.jabatan, true);
-              idxAnggotaSek +=1;
-            }
-            else{
-              addAnggota(tbanggotaSek, element.jabatan, false);
-              idxAnggotaSek +=1;
-            }
-          }
-          else if (element.keterangan === "Kelompok Pengelola Program Bantuan Sosial dan Jaminan Sosial Terpadu Berbasis Rumah Tangga, Keluarga dan Individu"){
-            if(element.dalam_tim === "Koordinator"){
-              fillRow(trkoorBansos, "td", element.dalam_tim, element.jabatan);
-            }
-            else if(idxAnggotaBansos === 1){
-              addAnggota(tbanggotaBansos, element.jabatan, true);
-              idxAnggotaBansos +=1;
-            }
-            else {
-              addAnggota(tbanggotaBansos, element.jabatan, false);
-              idxAnggotaBansos +=1;
-            }
-          }
-          else if (element.keterangan === "Kelompok Pengelola Program Pemberdayaan Masyarakat Dan Penguatan Pelaku Usaha Mikro dan Kecil"){
-            if(element.dalam_tim === "Koordinator"){
-              fillRow(trkoorPermas, "td", element.dalam_tim, element.jabatan);
-            }
-            else if(idxAnggotaPermas === 1){
-              addAnggota(tbanggotaPermas, element.jabatan, true);
-              idxAnggotaPermas +=1;
-            }
-            else {
-              addAnggota(tbanggotaPermas, element.jabatan, false);
-              idxAnggotaPermas +=1;
-            }
-          }
+      } else if (rowMap[el.dalam_tim]) {
+        const { el: tr, tag } = rowMap[el.dalam_tim];
+        fillRow(tr, tag, el.dalam_tim, el.jabatan);
+      } else if (el.dalam_tim === "Anggota" && el.keterangan === "Sekretariat") {
+        addAnggota(anggotaMap["Sekretariat"].ul, el.jabatan);
+      } else if (anggotaMap[el.keterangan]) {
+        const group = anggotaMap[el.keterangan];
+        if (el.dalam_tim === "Koordinator") {
+          fillRow(group.koor, "td", el.dalam_tim, el.jabatan);
+        } else {
+          addAnggota(group.ul, el.jabatan);
         }
       }
     });
@@ -199,84 +131,3 @@ document.addEventListener("DOMContentLoaded", async () => {
   await loadStrukturTkpk();   // tunggu selesai
   connectBoxesWithPath();     // baru gambar garis
 });
-
-
-
-// // --- Fungsi render tabel utama (jabatan inti) ---
-// function renderMainTkpk(data) {
-//   const mainRoles = [
-//     "Penanggung Jawab",
-//     "Ketua",
-//     "Wakil Ketua",
-//     "Sekretaris",
-//     "Wakil Sekretaris I",
-//     "Wakil Sekretaris II",
-//     "Wakil Sekretaris III"
-//   ];
-
-//   const tbody = document.querySelector("#main-tkpk tbody");
-//   tbody.innerHTML = "";
-
-//   data.filter(d => mainRoles.includes(d.dalam_tim))
-//       .forEach(d => {
-//         const tr = document.createElement("tr");
-//         tr.innerHTML = `
-//           <td>${d.jabatan}</td>
-//           <td>${d.dalam_tim}</td>
-//         `;
-//         tbody.appendChild(tr);
-//       });
-// }
-
-// // --- Fungsi render Pokja Bansos ---
-// function renderPokjaBansos(data) {
-//   const tbody = document.querySelector("#pokja-bansos tbody");
-//   tbody.innerHTML = "";
-
-//   data.filter(d => d.keterangan === "Kelompok Pengelola Program Bantuan Sosial dan Jaminan Sosial Terpadu Berbasis Rumah Tangga, Keluarga dan Individu")
-//       .forEach(d => {
-//         const tr = document.createElement("tr");
-//         tr.innerHTML = `
-//           <td>${d.jabatan}</td>
-//           <td>${d.dalam_tim}</td>
-//         `;
-//         tbody.appendChild(tr);
-//       });
-// }
-
-// // --- Fungsi render Pokja Pemberdayaan ---
-// function renderPokjaPemberdayaan(data) {
-//   const tbody = document.querySelector("#pokja-pemberdayaan tbody");
-//   tbody.innerHTML = "";
-
-//   data.filter(d => d.keterangan === "Kelompok Pengelola Program Pemberdayaan Masyarakat Dan Penguatan Pelaku Usaha Mikro dan Kecil")
-//       .forEach(d => {
-//         const tr = document.createElement("tr");
-//         tr.innerHTML = `
-//           <td>${d.jabatan}</td>
-//           <td>${d.dalam_tim}</td>
-//         `;
-//         tbody.appendChild(tr);
-//       });
-// }
-
-// // --- Fungsi render Sekretariat ---
-// function renderSekretariat(data) {
-//   const tbody = document.querySelector("#Sekretariat tbody");
-//   tbody.innerHTML = "";
-
-//   data.filter(d => d.keterangan === "Sekretariat")
-//       .forEach(d => {
-//         const tr = document.createElement("tr");
-//         tr.innerHTML = `
-//           <td>${d.jabatan}</td>
-//           <td>${d.dalam_tim}</td>
-//         `;
-//         tbody.appendChild(tr);
-//       });
-// }
-
-// // --- Fungsi render Law Table (kosong dulu) ---
-// function renderLawTable() {
-//   document.getElementById("tbody-law").innerHTML = "";
-// }

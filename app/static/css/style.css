@@ -258,48 +258,98 @@ nav {
 }
 
 /* organisasi */
-.org-container {
+.org-grid {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  grid-template-rows: repeat(9);
-  /* gap: 10px; */
-  /* width: 100%; */
-  position: relative; 
-  margin: 10px 10px;
+  grid-auto-rows: min-content;
+  gap: 20px; /* jarak antar kotak */
+  padding: 20px;
+  position: relative;
 }
+
 .org-item {
-  border: 1px solid #333;
-  margin: 10px;
-  text-align: left;
   background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
 }
-.org-space-item {
-  margin: 10px;
+
+.org-item table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.org-item th, .org-item td {
+  padding: 6px;
   text-align: left;
 }
-svg.connector {
+
+.org-item th.center {
+  text-align: center;
+}
+
+.org-item ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.connector {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* biar tidak ganggu klik */
 }
 
-#pj th, #pj td{
-  text-align: center;
-  vertical-align: middle;
+.gc-1-5 {
+  grid-column: 1/5;
 }
 
-#pj {
-  width: 100%;
-  height: 100%;
+.gc-4-7 {
+  grid-column: 4/7;
 }
 
-.ketuwaketu tr, .ketuwaketu td {
-  text-align:center
+.gc-5 {
+  grid-column: 5;
 }
-.ketuwaketu {
-  width: 100%;
-  height: 100%;
+
+.gc-6-10 {
+  grid-column: 6/10;
+}
+
+.gr-1 {
+  grid-row: 1;
+}
+
+.gr-2 {
+  grid-row: 2;
+}
+
+.gr-3 {
+  grid-row: 3;
+}
+
+.gr-4 {
+  grid-row: 4;
+}
+
+.gr-5 {
+  grid-row: 5;
+}
+
+.gr-6 {
+  grid-row: 6;
+}
+
+.gr-7 {
+  grid-row: 7;
+}
+
+.gr-8 {
+  grid-row: 8;
+}
+
+.gr-9 {
+  grid-row: 9;
 }

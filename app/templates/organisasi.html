@@ -15,26 +15,26 @@
     </ul>
   </nav>
 
-  <div class="org-container" id="grid">
-    <div class="org-item" id="box1" style="grid-column: 4/7; grid-row: 1;">
+  <div class="org-grid" id="grid">
+    <div class="org-item gc-4-7 gr-1" id="box1">
         <table id="pj"> </table>
     </div>
 
-    <div class="org-space-item" id="space1" style="grid-column: 5; grid-row: 2;">
+    <div class="org-space-item gc-5 gr-2" id="space1">
     </div>
 
-    <div class="org-item" id="box2" style="grid-column: 4/7; grid-row: 3;">
+    <div class="org-item gc-4-7 gr-3" id="box2">
         <table class="ketuwaketu">
             <thead> <tr id="ketua"></tr> </thead>
             <tbody> <tr id="wakilKetua"> </tr> </tbody>
         </table>
     </div>
 
-    <div class="org-space-item" id="space2" style="grid-column: 5; grid-row: 4;">
+    <div class="org-space-item gc-5 gr-4" id="space2">
     </div>
 
     <!-- Baris 2, Kolom 4 -->
-    <div class="org-item" id="box3" style="grid-column: 6/10; grid-row: 5;">
+    <div class="org-item gc-6-10 gr-5" id="box3">
         <table >
             <thead> <tr id="sekretaris"> </tr> </thead>
             <tbody> 
@@ -45,11 +45,11 @@
         </table>
     </div>
 
-    <div class="org-space-item" id="space3" style="grid-column: 5; grid-row: 6;">
+    <div class="org-space-item gc-5 gr-6" id="space3">
     </div>
 
 
-    <div class="org-item" id="box4" style="grid-column: 6/10; grid-row: 7;">
+    <div class="org-item gc-6-10 gr-7" id="box4">
         <table>    
             <thead>
                 <tr>
@@ -59,16 +59,22 @@
             <tbody>
                 <tr id="kepSek"> </tr>
                 <tr id="waKepSek"> </tr>
-                <tbody id="anggotaSek"></tbody>
+                <tr>
+                    <td>Anggota</td>
+                    <td>:</td>
+                    <td>
+                        <ul id="listSekretariat"></ul>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
         
-    <div class="org-space-item" id="space4" style="grid-column: 5; grid-row: 8;">
+    <div class="org-space-item gc-5 gr-8" id="space4">
     </div>
 
     <!-- Baris 3, Kolom 1 -->
-    <div class="org-item" id="box5" style="grid-column: 1/5; grid-row: 9;">
+    <div class="org-item gc-1-5 gr-9" id="box5">
         <table >
             <thead>
                 <tr>
@@ -77,13 +83,19 @@
             </thead>
             <tbody>
                 <tr id="koorBansos"> </tr>
-                <tbody id="anggotaBansos"></tbody>
+                <tr>
+                    <td>Anggota</td>
+                    <td>:</td>
+                    <td>
+                        <ul id="listBansos"></ul>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
 
     <!-- Baris 3, Kolom 3 -->
-    <div class="org-item" id="box6" style="grid-column: 6/10; grid-row: 9;">
+    <div class="org-item gc-6-10 gr-9" id="box6">
         <table >
             <thead>
                 <tr>
@@ -92,7 +104,13 @@
             </thead>
             <tbody>
                 <tr id="koorPermas"> </tr>
-                <tbody id="anggotaPermas"></tbody>
+                <tr>
+                    <td>Anggota</td>
+                    <td>:</td>
+                    <td>
+                        <ul id="listPermas"></ul>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>

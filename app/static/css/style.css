@@ -20,29 +20,34 @@ body {
 nav {
   background-color: var(--primary);
   padding: 10px;
-  text-align: center;
 }
 
 .menu {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: inline-flex;
+  display: flex; /* lebih konsisten daripada inline-flex */
+  align-items: center;
 }
 
 .menu li {
-  margin: 0 15px;
+  margin: 0 10px;
 }
 
 .menu a {
+  display: block;              /* area penuh bisa diklik */
+  padding: 8px 12px;           /* beri ruang klik */
+  border-radius: 6px;          /* sudut membulat */
+  background-color: transparent;
   color: var(--bg-light);
   text-decoration: none;
   font-weight: bold;
-  transition: color 0.3s;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .menu a:hover {
-  color: var(--accent);
+  background-color: var(--accent); /* warna latar saat hover */
+  color: var(--bg-light);          /* teks tetap kontras */
 }
 
 .container {
@@ -233,7 +238,7 @@ th {
   border: 1px solid var(--border);
 }
 
-.org-item th { text-align: left; }
+.org-item th, .org-item td { text-align: left; }
 .org-item th.center,
 .mid-tab th, .mid-tab td {
   text-align: center;

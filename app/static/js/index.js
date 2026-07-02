@@ -146,14 +146,14 @@ async function loadTegalTable() {
     const row = `
       <tr>
         <td>${d.tahun}</td>
-        <td>${d.target_min ?? '-'}</td>
-        <td>${d.target_max ?? '-'}</td>
-        <td>${d.jumlah_kemiskinan ?? '-'}</td>
-        <td>${d.capaian ?? '-'}</td>
+        <td>${d.target_min.toString().replace('.', ',') ?? '-'}</td>
+        <td>${d.target_max.toString().replace('.', ',') ?? '-'}</td>
+        <td>${d.jumlah_kemiskinan.toString().replace('.', ',') ?? '-'}</td>
+        <td>${d.capaian.toString().replace('.', ',') ?? '-'}</td>
         <td>${d.garis_kemiskinan.toLocaleString('id-ID') ?? '-'}</td>
-        <td>${d.kedalaman ?? '-'}</td>
-        <td>${d.keparahan ?? '-'}</td>
-        <td>${d.indeks_gini ?? '-'}</td>
+        <td>${d.kedalaman.toString().replace('.', ',') ?? '-'}</td>
+        <td>${d.keparahan.toString().replace('.', ',') ?? '-'}</td>
+        <td>${d.indeks_gini.toString().replace('.', ',') ?? '-'}</td>
       </tr>
     `;
     tbody.insertAdjacentHTML('beforeend', row);
@@ -201,7 +201,7 @@ async function loadKemiskinanTable() {
           style = 'background-color: #f5a3a3;'; // merah
         }
       }
-      row += `<td style="${style}">${val}</td>`;
+      row += `<td style="${style}">${val.toString().replace('.', ',')}</td>`;
     });
     row += '</tr>';
     tbody.insertAdjacentHTML('beforeend', row);

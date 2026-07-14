@@ -2,6 +2,10 @@ rencana berikutnya
 v- perbaikan warna menggunakan val supaya lebih konsisten
 - menu menggunakan api, supaya lebih dinamis
 v- lengkapi logo kota tegal
+- membuat tampilan dashboard
+    - 5 kabar terbaru
+    - capaian 5 tahun terakhir
+    - distribusi dan realisasi tagging ter-update  
 - membuat tampilan admin
 - membuat tampilan kabar
 - membuat tampilan sumber data dan dasar hukum

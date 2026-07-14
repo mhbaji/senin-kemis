@@ -29,27 +29,6 @@ class DataKemiskinan(db.Model):
     persentase_kemiskinan_ekstrem = db.Column(db.Float)
     penduduk_kemiskinan_ekstrem = db.Column(db.Float)
 
-# class KodeEksternal(db.Model):
-#     __tablename__ = 'kode_eksternal'
-#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-#     nama_eksternal = db.Column(db.String, nullable=False)
-
-#     # relasi ke data_nasional_provinsi
-#     data_nasional_provinsi = db.relationship(
-#         'DataNasionalProvinsi',
-#         backref='kode_eksternal',
-#         lazy=True
-#     )
-
-# class DataNasionalProvinsi(db.Model):
-#     __tablename__ = 'data_nasional_provinsi'
-#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-#     eksternal_id = db.Column(db.Integer, db.ForeignKey('kode_eksternal.id'), nullable=False)
-#     tahun = db.Column(db.Integer, nullable=False)
-#     garis_kemiskinan = db.Column(db.Float)
-#     jumlah_penduduk_miskin = db.Column(db.Float)  # ribu jiwa
-#     persentase_penduduk_miskin = db.Column(db.Float)
-
 class KodeStrategi(db.Model):
     __tablename__ = 'kode_strategi'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -123,3 +102,12 @@ class StrukturTkpk(db.Model):
     jabatan = db.Column(db.Integer, nullable=False)  # triwulan (1–4)
     dalam_tim = db.Column(db.Integer, nullable=False)
     keterangan = db.Column(db.String, nullable=True)
+    
+class DataPendukung(db.Model):
+    __tablename__ = "data_pendukung"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    nama = db.Column(db.Text)
+    tautan = db.Column(db.Text)        
+    keterangan = db.Column(db.Text)
+    rilis = db.Column(db.Integer)      

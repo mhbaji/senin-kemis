@@ -7,6 +7,8 @@
   --border: #ccc;
   --table-header: #e0e6ed;
   --highlight: #b2bec3;
+  --text-dark: #333;
+  --accent-hover: #007bff;
 }
 
 body {
@@ -142,6 +144,51 @@ th {
   min-width: 0;
 }
 
+#legend-list {
+  grid-column: 1 / span 2;   /* melebar ke 2 kolom */
+  justify-self: center;      /* posisikan horizontal di tengah */
+  list-style: none;          /* opsional: hilangkan bullet */
+  padding: 0;
+  margin-top: 10px;
+  text-align: center;        /* teks di dalam <li> rata tengah */
+}
+
+.year-container {
+  background-color: var(--bg-section);
+  border-radius: 8px;
+  padding: 15px;
+  margin: 15px 0;
+  box-shadow: 0 2px 6px var(--border);
+  gap: 8px;
+}
+
+.year-container label {
+  font-weight: bold;
+  color: var(--text-dark);
+  margin-bottom: 5px;
+}
+
+.year-container select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-light);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.year-container select:hover {
+  border-color: var(--accent-hover);
+  box-shadow: 0 0 6px var(--accent-hover);
+}
+
+.year-container select:focus {
+  outline: none;
+  border-color: var(--accent-hover);
+  box-shadow: 0 0 8px var(--accent-hover);
+}
+
 /* Table umum */
 table {
   width: 100%;
@@ -274,3 +321,108 @@ th {
 .gr-7 { grid-row: 7; }
 .gr-8 { grid-row: 8; }
 .gr-9 { grid-row: 9; }
+
+.dokduk-table th:nth-child(3),
+.dokduk-table td:nth-child(3) {
+  width: 60%;
+}
+
+.dokduk-table td {
+  border: 1px solid var(--border);
+  padding: 8px;
+  text-align: left;
+}
+
+.form-container {
+  width: 75%;
+  margin: 30px auto; /* ditengah */
+  background-color: var(--bg-section);
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.form-container h2 {
+  margin-bottom: 20px;
+  color: var(--primary);
+  font-size: 20px;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 10px;
+}
+
+/* Radio button sejajar dengan area klik luas */
+.radio-group {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.radio-group input[type="radio"] {
+  display: none;
+}
+
+.radio-group label {
+  flex: 1;
+  text-align: center;
+  background: var(--bg-light);
+  color: var(--primary);
+  padding: 12px 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.radio-group label:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.radio-group input[type="radio"]:checked + label {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Input umum */
+.form-container input[type="text"],
+.form-container input[type="url"],
+.form-container input[type="file"],
+.form-container input[type="date"],
+.form-container textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-container input:focus,
+.form-container textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 6px rgba(52,152,219,0.4);
+}
+
+/* Textarea lebih tinggi */
+.form-container textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+/* Tombol simpan */
+.form-container button {
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+  background-color: var(--accent-hover);
+}

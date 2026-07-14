@@ -1,10 +1,16 @@
-from flask import Blueprint, render_template, jsonify
+import os
+import time
+import datetime
+
+from flask import Blueprint, abort, request, render_template, jsonify, send_file
 from .models import *
 from .tools import *
 from sqlalchemy import func
 from sqlalchemy.orm import aliased
 
 main = Blueprint('main', __name__)
+UPLOAD_FOLDER = os.path.join(main.root_path, "static", "dokumen-pendukung")
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 @main.route('/')
 def index():
@@ -21,6 +27,20 @@ def organisasi():
 @main.route('/kabar')
 def kabar():
     return render_template('kabar.html')
+
+@main.route('/dokumen-pendukung')
+def dokduk():
+    return render_template('dokduk.html')
+
+@main.route('/upload-dokumen-pendukung')
+def updokduk():
+    return render_template('updok.html')
+
+@main.route("/years")
+def get_years():
+    years = db.session.query(TaggingSubKegiatan.tahun).distinct().order_by(TaggingSubKegiatan.tahun).all()
+    years = [y[0] for y in years]  # ambil nilai integer dari tuple
+    return jsonify(years)
 
 @main.route("/api/target_vs_capaian")
 def target_vs_capaian():
@@ -175,7 +195,9 @@ def capaian_kemiskinan():
 
 @main.route('/api/summary_strategi')
 def summary_strategi():
-    latest_year = db.session.query(func.max(RealisasiTagging.tahun)).scalar()
+    tahun = request.args.get("tahun")
+    print("TAHUN: ", tahun)
+    # latest_year = db.session.query(func.max(RealisasiTagging.tahun)).scalar()
 
     results = (
         db.session.query(
@@ -189,7 +211,7 @@ def summary_strategi():
         .select_from(TaggingSubKegiatan)
         .join(KodeStrategi, TaggingSubKegiatan.strategi_id == KodeStrategi.id)
         .join(RealisasiTagging, RealisasiTagging.tagging_id == TaggingSubKegiatan.id)
-        .filter(RealisasiTagging.tahun == latest_year)
+        .filter(RealisasiTagging.tahun == tahun)
         .group_by(KodeStrategi.id, KodeStrategi.strategi, RealisasiTagging.tahun)
         .order_by(KodeStrategi.id.asc())
         .all()
@@ -210,7 +232,8 @@ def summary_strategi():
 
 @main.route('/api/rangkuman_strategi')
 def rangkuman_strategi():
-    latest_year = db.session.query(func.max(RealisasiTagging.tahun)).scalar()
+    tahun = request.args.get("tahun")
+    # latest_year = db.session.query(func.max(RealisasiTagging.tahun)).scalar()
 
     results = (
         db.session.query(
@@ -223,7 +246,7 @@ def rangkuman_strategi():
         .select_from(TaggingSubKegiatan)
         .join(KodeStrategi, TaggingSubKegiatan.strategi_id == KodeStrategi.id)
         .join(RealisasiTagging, RealisasiTagging.tagging_id == TaggingSubKegiatan.id)
-        .filter(RealisasiTagging.tahun == latest_year)
+        .filter(RealisasiTagging.tahun == tahun)
         .group_by(KodeStrategi.id, KodeStrategi.strategi, RealisasiTagging.periode)
         .order_by(KodeStrategi.id.asc(), RealisasiTagging.periode.asc())
         .all()
@@ -252,7 +275,8 @@ def rangkuman_strategi():
 
 @main.route('/api/detail_subkegiatan')
 def detail_subkegiatan():
-    latest_year = db.session.query(func.max(RealisasiTagging.tahun)).scalar()
+    tahun = request.args.get("tahun")
+    # latest_year = db.session.query(func.max(RealisasiTagging.tahun)).scalar()
 
     results = (
         db.session.query(
@@ -272,7 +296,7 @@ def detail_subkegiatan():
         .join(KodeKegiatan, TaggingSubKegiatan.kegiatan_id == KodeKegiatan.id)
         .join(KodeSubKegiatan, TaggingSubKegiatan.subkegiatan_id == KodeSubKegiatan.id)
         .join(RealisasiTagging, RealisasiTagging.tagging_id == TaggingSubKegiatan.id)
-        .filter(RealisasiTagging.tahun == latest_year)
+        .filter(RealisasiTagging.tahun == tahun)
         .order_by(KodeStrategi.id.asc(), RealisasiTagging.periode.asc())
         .all()
     )
@@ -318,7 +342,6 @@ def detail_subkegiatan():
         "summary": list(summary.values())
     })
 
-
 @main.route('/api/struktur_tkpk')
 def get_struktur_tkpk():
     data = StrukturTkpk.query.all()
@@ -331,3 +354,68 @@ def get_struktur_tkpk():
             "keterangan": row.keterangan
         })
     return jsonify(result)
+
+@main.route("/api/data_pendukung")
+def list_data_pendukung():
+    rows = DataPendukung.query.order_by(DataPendukung.rilis.desc()).all()
+    result = [
+        {
+            "id": r.id,
+            "nama": r.nama,
+            "keterangan": r.keterangan,
+            "rilis": datetime.fromtimestamp(r.rilis).strftime("%Y-%m-%d"),
+            "tautan": r.tautan
+        }
+        for r in rows
+    ]
+    return jsonify(result)
+
+@main.route("/api/data_pendukung", methods=["POST"])
+def add_data_pendukung():
+    nama = request.form.get("nama")
+    keterangan = request.form.get("keterangan")
+    rilis = request.form.get("rilis")
+    tautan = None
+
+    if "file" in request.files and request.files["file"].filename != "":
+        file = request.files["file"]
+        filename = file.filename
+        _, ext = os.path.splitext(filename)
+
+        now_str = datetime.now().strftime("%Y%m%d")
+        kode = f"{now_str}{rilis.replace('-', '')}"
+
+        save_name = f"{kode}{ext}"
+        file.save(os.path.join(UPLOAD_FOLDER, save_name))
+        tautan = f"/api/download/{save_name}"
+    else:
+        tautan = request.form.get("tautan")
+
+    # simpan ke DB
+    dok = DataPendukung(
+        nama=nama,
+        keterangan=keterangan,
+        rilis=int(time.mktime(time.strptime(rilis, "%Y-%m-%d"))),  # simpan sebagai unix timestamp
+        tautan=tautan
+    )
+    db.session.add(dok)
+    db.session.commit()
+
+    return jsonify({"message": "Data berhasil ditambahkan", "id": dok.id})
+
+@main.route("/api/download/<path:filename>")
+def download_file(filename):
+    dok = DataPendukung.query.filter(DataPendukung.tautan.contains(filename)).first()
+    if not dok:
+        abort(404)
+
+    file_path = os.path.join(UPLOAD_FOLDER, filename)
+    if not os.path.exists(file_path):
+        abort(404)
+
+    # gunakan kolom nama sebagai nama file download
+    return send_file(
+        file_path,
+        as_attachment=True,
+        download_name=f"{dok.nama}{os.path.splitext(filename)[1]}"
+    )

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Dokumen Pendukung Penanggulangan Kemiskinan Kota Tegal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul class="menu">
+            <li>
+                <img src="{{ url_for('static', filename='img/LOGO-SENIN-KEMIS-white-bg.png') }}"
+                alt="Logo Pemerintah Kota Tegal"
+                height="40px"
+                > 
+            </li>
+            <li><a href="/">Beranda</a></li>
+            <li><a href="/statistik">Statistik</a></li>
+            <li><a href="/upaya">Upaya</a></li>
+            <li><a href="/organisasi">Organisasi</a></li>
+            <li><a href="/dokumen-pendukung">Dokumen Pendukung</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="form-container">
+        <h2>Tambah Dokumen Pendukung</h2>
+        <div class="radio-group">
+            <input type="radio" id="radioTautan" name="inputType" value="tautan" checked>
+            <label for="radioTautan">Tautan</label>
+
+            <input type="radio" id="radioFile" name="inputType" value="file">
+            <label for="radioFile">File</label>
+        </div>
+        
+        <form id="formDokduk" enctype="multipart/form-data">
+            <div>
+                <label>Nama:</label>
+                <input type="text" name="nama" required>
+            </div>
+
+            <div>
+                <label>Keterangan:</label>
+                <textarea name="keterangan"></textarea>
+            </div>
+
+            <div id="tautanField">
+                <label>Tautan:</label>
+                <input type="url" name="tautan" placeholder="https://..." >
+            </div>
+
+            <div id="fileField" style="display:none">
+                <label>Upload File:</label>
+                <input type="file" name="file" accept=".pdf,.png,.jpg,.jpeg">
+            </div>
+            
+            <div>
+                <label>Waktu Rilis:</label>
+                <input type="date" name="rilis" required>
+            </div>
+            <button type="submit">Simpan</button>
+        </form>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/updok.js') }}"></script>
+</body>
+</html>

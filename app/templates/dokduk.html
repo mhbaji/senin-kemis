@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Kabar Upaya Penanggulangan Kemiskinan Kota Tegal</title>
+    <title>Dokumen Pendukung Penanggulangan Kemiskinan Kota Tegal</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
@@ -25,10 +25,22 @@
 
     <!-- Main Content -->
     <div class="container">
-        <h1>Selamat Datang di Sistem Pengelolaan Kemiskinan Kota</h1>
-        <p>Pilih menu di atas untuk melihat data, laporan, dan informasi terkait.</p>
+        <h1>Dokumen Terkait Penanggulangan Kemiskinan Kota Tegal</h1>
+        <table class="dokduk-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Keterangan</th>
+                    <th>Waktu Rilis</th>
+                    <th>Download</th>
+                </tr>    
+            </thead>
+            
+            <tbody id="tbDokduk"> </tbody>
+        </table>
     </div>
 
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dokduk.js') }}"></script>
 </body>
 </html>

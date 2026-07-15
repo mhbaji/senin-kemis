@@ -35,7 +35,7 @@ async function loadSummaryStrategi(intahun) {
     data: {
       // labels: data.map(d => d.strategi),
       datasets: [{
-        label: data.map(d => d.strategi),
+        // label: data.map(d => d.strategi),
         data: data.map(d => d.jumlah_subkegiatan),
         backgroundColor: colors
       }]
@@ -63,19 +63,42 @@ async function loadSummaryStrategi(intahun) {
     data: {
       labels: data.map(d => d.strategi),
       datasets: [
-        { label: 'Anggaran', data: data.map(d => d.total_anggaran), backgroundColor: '#3498db' },
-        { label: 'Realisasi', data: data.map(d => d.total_realisasi), backgroundColor: '#2ecc71' }
+        {
+          label: 'Anggaran',
+          data: data.map(d => d.total_anggaran),
+          backgroundColor: '#9fa4ff',   // warna abu-abu sebagai target
+        },
+        {
+          label: 'Realisasi',
+          data: data.map(d => d.total_realisasi),
+          backgroundColor: '#2ecc71', // warna hijau sebagai capaian
+        }
       ]
     },
-    options: { plugins: { 
-      datalabels: { color: '#000', align: 'center', 
-        formatter: (value) => {
-            return "Rp "+value.toLocaleString('id-ID');
+    options: {
+      indexAxis: 'y', // bikin horizontal bar
+      responsive: true,
+      plugins: {
+        datalabels: {
+          color: '#000',
+          align: 'end',
+          formatter: (value) => "Rp " + value.toLocaleString('id-ID'),
         },
+        title: {
+          display: true,
+          text: chartTitle
+        }
       },
-      title: { display: true, text: chartTitle } 
-    } 
-  },
+      scales: {
+        x: {
+          ticks: {
+            callback: function(value) {
+              return 'Rp ' + value.toLocaleString('id-ID');
+            }
+          }
+        }
+      }
+    },
     plugins: [ChartDataLabels]
   });
 

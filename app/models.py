@@ -3,7 +3,7 @@ from . import db
 class KodeWilayah(db.Model):
     __tablename__ = 'kode_wilayah'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    kode = db.Column(db.Integer, unique=True, nullable=False)  # kode resmi BPS
+    kode = db.Column(db.String, unique=True, nullable=False)  # kode resmi BPS
     nama = db.Column(db.String, nullable=False)
     jenis = db.Column(db.Integer, nullable=False)  # 0 = kabupaten, 1 = kota
 
@@ -104,10 +104,14 @@ class StrukturTkpk(db.Model):
     keterangan = db.Column(db.String, nullable=True)
     
 class DataPendukung(db.Model):
-    __tablename__ = "data_pendukung"
-
+    __tablename__ = 'data_pendukung'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    nama = db.Column(db.Text)
-    tautan = db.Column(db.Text)        
-    keterangan = db.Column(db.Text)
-    rilis = db.Column(db.Integer)      
+    nama = db.Column(db.String)
+    tautan = db.Column(db.String)
+    keterangan = db.Column(db.String)
+    rilis = db.Column(db.Integer)  # unix timestamp
+    instansi_id = db.Column(db.Integer, db.ForeignKey('kode_wilayah.id'))
+
+    # relasi ke kode_wilayah
+    instansi = db.relationship('KodeWilayah', backref='data_pendukung', lazy=True)
+

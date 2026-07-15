@@ -8,15 +8,15 @@ async function loadDokumenPendukung() {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${i+1}</td>
-      <td>${d.nama}</td>
-      <td>${d.keterangan}</td>
-      <td>${d.rilis}</td>
       <td>
         <a href="${d.tautan}" 
             target="_blank" 
             rel="noopener noreferrer"
-            class="btn-download">DOWNLOAD</a>
+            class="btn-download">${d.nama}</a>
       </td>
+      <td>${d.keterangan}</td>
+      <td>${d.instansi}</td>
+      <td>${d.rilis}</td>
     `;
     tbody.appendChild(tr);
   });

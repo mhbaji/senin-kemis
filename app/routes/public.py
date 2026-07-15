@@ -1,9 +1,14 @@
 from datetime import datetime
 import os
-from flask import Blueprint, jsonify, render_template
+from flask import Blueprint, abort, jsonify, render_template, send_file
 from ..models import *
 
 public = Blueprint('public', __name__)
+UPLOAD_FOLDER = ""
+def setting(SETTING:dict):
+    global UPLOAD_FOLDER 
+    UPLOAD_FOLDER = SETTING['UPLOAD_FOLDER']
+
 @public.route('/')
 def indeks():
     return render_template('indeks.html')
@@ -37,11 +42,29 @@ def list_data_pendukung():
             "nama": r.nama,
             "keterangan": r.keterangan,
             "rilis": datetime.fromtimestamp(r.rilis).strftime("%Y-%m-%d"),
-            "tautan": r.tautan
+            "tautan": r.tautan,
+            "instansi": r.instansi.nama if r.instansi else None
         }
         for r in rows
     ]
     return jsonify(result)
+
+@public.route("/api/download/<path:filename>")
+def download_file(filename):
+    dok = DataPendukung.query.filter(DataPendukung.tautan.contains(filename)).first()
+    if not dok:
+        abort(404)
+
+    file_path = os.path.join(UPLOAD_FOLDER, filename)
+    if not os.path.exists(file_path):
+        abort(404)
+
+    # gunakan kolom nama sebagai nama file download
+    return send_file(
+        file_path,
+        as_attachment=True,
+        download_name=f"{dok.nama}{os.path.splitext(filename)[1]}"
+    )
 
 @public.route("/years")
 def get_years():

@@ -57,6 +57,7 @@ nav {
 }
 
 /* dashboard */
+.up-container,
 .chart-container, .compare-container {
   width: 100%;
   display: grid;
@@ -65,8 +66,11 @@ nav {
   padding: 10px 0;
 }
 
+.bar-container,
 .chart-box {
   background-color: var(--bg-section);
+}
+.chart-box {
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 10px;
@@ -121,6 +125,8 @@ th {
 }
 
 /* Grid */
+.dokduk-container,
+.up-container,
 .grafik-container,
 .donut-container,
 .upaya-container,
@@ -129,10 +135,15 @@ th {
   gap: 10px;
 }
 
+.dokduk-container { grid-template-columns: 1fr 1fr; }
+.up-container { grid-template-columns: 1fr 2fr; }
 .grafik-container { grid-template-columns: 1fr 1fr; }
 .donut-container { grid-template-columns: 1fr 1fr; text-align: center; }
 .upaya-container { grid-template-columns: 1fr 1fr; padding: 10px; }
 .upaya-grid { grid-template-columns: 1fr 1fr 2fr; gap: 15px; }
+/* .bar-container{
+  height: 300px;
+} */
 
 /* Chart box */
 .upaya-grid .chart-box {
@@ -425,4 +436,8 @@ th {
 
 .form-container button:hover {
   background-color: var(--accent-hover);
+}
+
+.h-mid {
+  text-align: center;
 }

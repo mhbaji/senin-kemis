@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Kabar Upaya Penanggulangan Kemiskinan Kota Tegal</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -25,8 +27,40 @@
 
     <!-- Main Content -->
     <div class="container">
-        <h1>Selamat Datang di Sistem Pengelolaan Kemiskinan Kota</h1>
-        <p>Pilih menu di atas untuk melihat data, laporan, dan informasi terkait.</p>
+        <h1>Selamat Datang di Sistem Pengelolaan Data Kemiskinan Kota Tegal</h1>
+        <div class="chart-container">
+            <div>
+                <h1>Capaian Kinerja Indikator Kemiskinan Kota Tegal</h1>
+                <p>
+                    <strong>Penduduk Miskin</strong> adalah penduduk yang memiliki rata-rata pengeluaran per kapita per bulan di bawah Garis Kemiskinan
+                </p>
+                <p>
+                    <strong>Berdasarkan Bank Dunia, Penduduk miskin ekstrem</strong> adalah penduduk yang memiliki kemampuan dalam memenuhi kebutuhan hidup sehari-hari tidak lebih dari USD 1,9 PPP (Purchasing Power Parity), atau setara dengan Rp10.739/orang/hari atau Rp322.170/orang/bulan (Bank Dunia, 2022).
+                </p>
+            </div>
+            <div class="chart-box">
+                <h3>Tingkat Kemiskinan</h3>
+                <canvas id="chartCapaianKemiskinan"></canvas>
+            </div>
+
+            <div class="chart-box">
+                <h3>Tingkat Kemiskinan Ekstrem</h3>
+                <canvas id="chartCapaianKE"></canvas>
+            </div>
+        </div>
+
+        <div class="up-container">    
+            <div>
+                <h1>Upaya Penanggulangan Kemiskinan</h1>
+                <h3>Melalui 3 strategi:</h3>
+                <ul id="strategi-list"></ul>
+            </div>
+            <div class="bar-container">
+                <canvas id="chart-realisasi-strategi"></canvas>
+            </div>
+        </div>
     </div>
+
+    <script src="{{ url_for('static', filename='js/indeks.js') }}"></script>
 </body>
 </html>

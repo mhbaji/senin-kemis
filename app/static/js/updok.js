@@ -14,7 +14,7 @@ document.getElementById("formDokduk").addEventListener("submit", async (e) => {
   e.preventDefault();
   const formData = new FormData(e.target);
 
-  const res = await fetch("/api/data_pendukung", {
+  const res = await fetch("/admin/data_pendukung", {
     method: "POST",
     body: formData
   });

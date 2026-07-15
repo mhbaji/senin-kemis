@@ -4,12 +4,7 @@ from ..models import *
 
 strategy = Blueprint('strategy', __name__)
 
-@strategy.route('/api/summary_strategi')
-def summary_strategi():
-    tahun = request.args.get("tahun")
-    print("TAHUN: ", tahun)
-    # latest_year = db.session.query(func.max(RealisasiTagging.tahun)).scalar()
-
+def sum_strategy(tahun):
     results = (
         db.session.query(
             KodeStrategi.strategi,
@@ -40,6 +35,16 @@ def summary_strategi():
             }
         )
     return jsonify(output)
+
+@strategy.route('/api/last_summary_strategi')
+def last_summary_strategi():
+    tahun = db.session.query(func.max(RealisasiTagging.tahun)).scalar()
+    return sum_strategy(tahun)
+
+@strategy.route('/api/summary_strategi')
+def summary_strategi():
+    tahun = request.args.get("tahun")
+    return sum_strategy(tahun)
 
 @strategy.route('/api/rangkuman_strategi')
 def rangkuman_strategi():

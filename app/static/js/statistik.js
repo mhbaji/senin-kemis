@@ -90,12 +90,12 @@ function loadTegalKotaLain() {
 
 function loadKedalamanKeparahanGini() {
   renderChart(
-    'chartKedalamanKeparahanGini',
-    '/api/kedalaman_keparahan_gini',
+    'chartKedalamanKeparahanKE',
+    '/api/kedalaman_keparahan_ke',
     (data) => [
       { label: 'Kedalaman', data: data.map(d => d.kedalaman), fill: false },
       { label: 'Keparahan', data: data.map(d => d.keparahan), fill: false },
-      { label: 'Indeks Gini', data: data.map(d => d.indeks_gini), fill: false }
+      { label: 'Kemiskinan Ekstrem', data: data.map(d => d.ke), fill: false }
     ]
   );
 }
@@ -153,7 +153,7 @@ async function loadTegalTable() {
         <td>${d.garis_kemiskinan.toLocaleString('id-ID') ?? '-'}</td>
         <td>${d.kedalaman.toString().replace('.', ',') ?? '-'}</td>
         <td>${d.keparahan.toString().replace('.', ',') ?? '-'}</td>
-        <td>${d.indeks_gini.toString().replace('.', ',') ?? '-'}</td>
+        <td>${d.ke.toString().replace('.', ',') ?? '-'}</td>
       </tr>
     `;
     tbody.insertAdjacentHTML('beforeend', row);

@@ -4,6 +4,40 @@ from ..models import *
 
 poverty = Blueprint('poverty', __name__)
 
+@poverty.route("/api/kemiskinan_tegal")
+def kemiskinan_tegal():
+    tahun_list = tahun_range()
+    kota_tegal = KodeWilayah.query.filter_by(nama="Kota Tegal").first()
+    data = DataKemiskinan.query.filter(
+        DataKemiskinan.wilayah_id == kota_tegal.id,
+        DataKemiskinan.tahun.in_(tahun_list)
+    ).order_by(DataKemiskinan.tahun.asc()).all()
+
+    result = [
+        {
+            "tahun": d.tahun,
+            "capaian": d.persentase_penduduk_miskin
+        } for d in data
+    ]
+    return jsonify(result)
+
+@poverty.route("/api/kemiskinan_ekstrem_tegal")
+def kemiskinan_ekstrem_tegal():
+    tahun_list = tahun_range()
+    kota_tegal = KodeWilayah.query.filter_by(nama="Kota Tegal").first()
+    data = DataKemiskinan.query.filter(
+        DataKemiskinan.wilayah_id == kota_tegal.id,
+        DataKemiskinan.tahun.in_(tahun_list)
+    ).order_by(DataKemiskinan.tahun.asc()).all()
+
+    result = [
+        {
+            "tahun": d.tahun,
+            "capaian": d.persentase_kemiskinan_ekstrem
+        } for d in data
+    ]
+    return jsonify(result)
+
 @poverty.route("/api/target_vs_capaian")
 def target_vs_capaian():
     tahun_list = tahun_range()
@@ -64,8 +98,8 @@ def tegal_kota_lain():
         result[w] = [{"tahun": d.tahun, "persentase": d.persentase_penduduk_miskin} for d in data]
     return jsonify(result)
 
-@poverty.route("/api/kedalaman_keparahan_gini")
-def kedalaman_keparahan_gini():
+@poverty.route("/api/kedalaman_keparahan_ke")
+def kedalaman_keparahan_ke():
     tahun_list = tahun_range()
     kota_tegal = KodeWilayah.query.filter_by(nama="Kota Tegal").first()
     data = DataKemiskinan.query.filter(
@@ -77,7 +111,7 @@ def kedalaman_keparahan_gini():
             "tahun": d.tahun,
             "kedalaman": d.kedalaman,
             "keparahan": d.keparahan,
-            "indeks_gini": d.indeks_gini
+            "ke": d.persentase_kemiskinan_ekstrem
         } for d in data
     ]
     return jsonify(result)
@@ -117,7 +151,7 @@ def tegal_table():
             "garis_kemiskinan": d.garis_kemiskinan,
             "kedalaman": d.kedalaman,
             "keparahan": d.keparahan,
-            "indeks_gini": d.indeks_gini
+            "ke": d.persentase_kemiskinan_ekstrem
         } for d in data
     ]
     return jsonify(result)
